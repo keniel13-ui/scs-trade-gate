@@ -6,10 +6,10 @@ import urllib.request
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-# Local-first interpreter. Anthropic slots in as a higher rung when Gino's key lands;
+# Local-first interpreter. Anthropic slots in as a higher rung when the client's key lands;
 # Ollama is the local brain (same one Aza-Rion falls back to); deterministic regex is
 # the floor so the parser never hard-fails. The LLM is interpreter only -- it structures
-# Gino's messy text. It NEVER decides whether a setup is good. The gate is the judge.
+# the client's messy text. It NEVER decides whether a setup is good. The gate is the judge.
 OLLAMA_URL = "http://localhost:11434/api/generate"
 DEFAULT_MODEL = "llama3.2"
 

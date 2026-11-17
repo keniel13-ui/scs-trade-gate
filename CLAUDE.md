@@ -4,7 +4,7 @@ Guidance for Claude Code (and other agents) working in this repo.
 
 ## What this is
 
-A research and evidence bundle for the Gino execution proof: a deterministic,
+A research and evidence bundle for the client execution proof: a deterministic,
 read-only coherence gate between an agent and a future Robinhood MCP client, a scorer
 that replays signals under a frozen, hash-anchored policy, and a paper/shadow operator
 agent (Telegram/Discord). It never authenticates to Robinhood and has no order path.
@@ -16,8 +16,8 @@ Python 3.11+ is required (the macOS system `python3` 3.9 is too old). Run from t
 
 ```bash
 python -m pytest tests -q          # 115 passed, 3 skipped on a clean checkout
-python scripts/smoke_gino_gate.py  # offline gate smoke
-python -m gino_gate.server         # prints policy id, hash, mode
+python scripts/smoke_scs_gate.py  # offline gate smoke
+python -m scs_gate.server         # prints policy id, hash, mode
 ```
 
 Setup details: `docs/development.md`.
@@ -52,8 +52,8 @@ Setup details: `docs/development.md`.
 
 ## Secrets and local data
 
-- Tokens come from env vars (`GINO_TELEGRAM_BOT_TOKEN`, `GINO_DISCORD_BOT_TOKEN`,
-  `GINO_GATE_LOG_KEY`). Never write them to files in the repo; `.gitignore` blocks common
+- Tokens come from env vars (`SCS_TELEGRAM_BOT_TOKEN`, `SCS_DISCORD_BOT_TOKEN`,
+  `SCS_GATE_LOG_KEY`). Never write them to files in the repo; `.gitignore` blocks common
   token filenames.
 - `manifests/*.json` and `var/` hold captured account data and logs. They are gitignored
   on purpose; do not add them.

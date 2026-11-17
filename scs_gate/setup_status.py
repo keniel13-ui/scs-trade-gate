@@ -33,7 +33,7 @@ def assess_manifest_for_read_only_visit(
     manifest: dict[str, Any] | None,
     policy: PolicyEnvelope,
 ) -> SetupStatus:
-    """Assess whether a manifest can support a no-trade Gino setup visit."""
+    """Assess whether a manifest can support a no-trade the client setup visit."""
     if manifest is None:
         return SetupStatus(
             ready_for_visit=False,

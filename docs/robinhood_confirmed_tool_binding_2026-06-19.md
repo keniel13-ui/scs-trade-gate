@@ -70,7 +70,7 @@ These tools remain blocked because they are order/review tools or mutate account
 Readiness on the captured manifest:
 
 ```bash
-python3 scripts/gino_visit_readiness.py --manifest-json manifests/robinhood_manifest.normalized.json
+python3 scripts/visit_readiness.py --manifest-json manifests/robinhood_manifest.normalized.json
 ```
 
 Expected state:

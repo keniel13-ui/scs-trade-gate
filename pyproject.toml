@@ -1,7 +1,7 @@
 [project]
-name = "gino-coherence-gate"
+name = "scs-trade-gate"
 version = "0.0.1"
-description = "Read-only deterministic coherence gate skeleton for the Gino execution proof."
+description = "Read-only deterministic coherence gate skeleton for the client execution proof."
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
@@ -20,4 +20,4 @@ ignore = ["E501"]
 [tool.ruff.lint.per-file-ignores]
 # `net_returns` is unused, but computing it raises if a settled record lacks
 # net_return_pct. Removing it would change scorer behavior, so it stays.
-"gino_gate/scoring_metrics.py" = ["F841"]
+"scs_gate/scoring_metrics.py" = ["F841"]

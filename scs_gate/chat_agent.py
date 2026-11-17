@@ -8,7 +8,7 @@ from pathlib import Path
 from .operator_verdict import OperatorVerdict, explain_call
 
 
-DEFAULT_SOURCE_CSV = Path("/Users/kenielmaldonado/gino_discord_capture/raw/playbit_signal_chain_log_google_sheet_2026-06-25.csv")
+DEFAULT_SOURCE_CSV = Path("/Users/kenielmaldonado/scs_discord_capture/raw/playbit_signal_chain_log_google_sheet_2026-06-25.csv")
 
 
 @dataclass(frozen=True)
@@ -28,8 +28,8 @@ class ChatMemory:
             self.turns = self.turns[-20:]
 
 
-class GinoChatAgent:
-    """Deterministic chat shell over the current Gino operator engine.
+class TradeChatAgent:
+    """Deterministic chat shell over the current the client operator engine.
 
     This is intentionally not an open-ended LLM. It answers within the money-safe
     boundary we can verify today and delegates trade judgments to `explain_call`.
@@ -73,7 +73,7 @@ class GinoChatAgent:
                 text,
                 "I can do six things today:\n"
                 "1. Explain the current safety boundary.\n"
-                "2. Walk through Gino's strategy/risk rules that must be captured.\n"
+                "2. Walk through the client's strategy/risk rules that must be captured.\n"
                 "3. Judge a captured trade row as REFUSE, PAPER_ONLY, or REVIEW_ELIGIBLE.\n"
                 "4. Talk through whether a source deserves trust.\n"
                 "5. Help slow down impulse trades and bad-day decisions.\n"
@@ -93,13 +93,13 @@ class GinoChatAgent:
                 text,
                 "Current boundary: I do not place live Robinhood trades. I do not auto-trade. "
                 "I can review captured calls, refuse weak ones, mark paper-only calls, and identify review-eligible calls. "
-                "Live trading comes later only after Gino's risk caps, approval flow, paper results, and kill switch are explicit."
+                "Live trading comes later only after the client's risk caps, approval flow, paper results, and kill switch are explicit."
             )
 
         if any(word in lowered for word in ("risk", "rules", "setup", "strategy", "policy")):
             return self._remembered(
                 text,
-                "Before money moves, I need Gino's rules:\n"
+                "Before money moves, I need the client's rules:\n"
                 "- allowed instruments: stocks, options, crypto, or specific tickers\n"
                 "- max dollars or percent risk per trade\n"
                 "- max trades per day/week\n"
@@ -115,7 +115,7 @@ class GinoChatAgent:
                 text,
                 "The captured PlayBit-style source did not prove a live edge. "
                 "Blind-following the visible record failed, and the strict live-eligible subset did not show enough edge to trade live. "
-                "That does not mean every future setup is dead. It means we track Gino's real calls in paper and let settled outcomes decide."
+                "That does not mean every future setup is dead. It means we track the client's real calls in paper and let settled outcomes decide."
             )
 
         if any(word in lowered for word in ("should i take", "take this", "buy", "enter", "call", "put", "position")):

@@ -6,8 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-# Witness ledger lives under var/ (gitignored): Gino's data stays local, never committed.
-DEFAULT_LOG_PATH = Path(__file__).resolve().parents[1] / "var" / "gino_interaction_log.jsonl"
+# Witness ledger lives under var/ (gitignored): the client's data stays local, never committed.
+DEFAULT_LOG_PATH = Path(__file__).resolve().parents[1] / "var" / "scs_interaction_log.jsonl"
 
 
 def _now_iso() -> str:

@@ -1,6 +1,6 @@
 
-from gino_gate.paper_forward import PaperPosition
-from gino_gate.stop_enforcement import (
+from scs_gate.paper_forward import PaperPosition
+from scs_gate.stop_enforcement import (
     DailyBar,
     enforce_expired_no_close_stops,
     enforce_stop,
@@ -125,7 +125,7 @@ def test_enforce_expired_no_close_stops_filters_to_paper_ready_expired_positions
 def test_yahoo_urls_escape_symbol_path_and_query_characters():
     from datetime import date
 
-    from gino_gate import expiry_settlement, stop_enforcement
+    from scs_gate import expiry_settlement, stop_enforcement
 
     plain = stop_enforcement.yahoo_chart_url("AAPL", date(2026, 6, 1), date(2026, 6, 2))
     assert "/chart/AAPL?" in plain

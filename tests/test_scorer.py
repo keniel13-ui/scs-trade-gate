@@ -1,8 +1,8 @@
 from datetime import datetime, timezone
 
-from gino_gate.scorer import simulate_signal
-from gino_gate.scoring_metrics import aggregate_records
-from gino_gate.scoring_policy import ScoringPolicy
+from scs_gate.scorer import simulate_signal
+from scs_gate.scoring_metrics import aggregate_records
+from scs_gate.scoring_policy import ScoringPolicy
 
 
 def _policy(min_settled_n=2):

@@ -13,8 +13,8 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.chat_agent import DEFAULT_SOURCE_CSV, GinoChatAgent
-from gino_gate.interaction_log import InteractionLog
+from scs_gate.chat_agent import DEFAULT_SOURCE_CSV, TradeChatAgent
+from scs_gate.interaction_log import InteractionLog
 
 
 def redact(text: str, secret: str) -> str:
@@ -70,12 +70,12 @@ MAX_BACKOFF = 60.0
 
 def run_bot(
     client: TelegramClient,
-    agent: GinoChatAgent,
+    agent: TradeChatAgent,
     *,
     log: InteractionLog | None = None,
     allowed_chat_ids: set[int] | None = None,
 ) -> None:
-    print("Gino Telegram agent is running in paper/shadow mode.")
+    print("the client Telegram agent is running in paper/shadow mode.")
     print("Open Telegram, message the bot, and send: what can you do?")
     print("Press Ctrl+C to stop.")
     offset: int | None = None
@@ -106,7 +106,7 @@ def run_bot(
                     continue
                 if text.lower() in {"/start", "start"}:
                     reply = (
-                        "Gino agent is online in paper/shadow mode. I can talk through trades, rules, "
+                        "the client agent is online in paper/shadow mode. I can talk through trades, rules, "
                         "sources, discipline, and verdicts. I cannot place live Robinhood trades."
                     )
                     client.send_message(chat_id, reply)
@@ -156,12 +156,12 @@ def run_bot(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run Gino's local paper/shadow agent as a Telegram bot.")
+    parser = argparse.ArgumentParser(description="Run the client's local paper/shadow agent as a Telegram bot.")
     parser.add_argument("--source-csv", type=Path, default=DEFAULT_SOURCE_CSV)
-    parser.add_argument("--token-env", default="GINO_TELEGRAM_BOT_TOKEN")
+    parser.add_argument("--token-env", default="SCS_TELEGRAM_BOT_TOKEN")
     parser.add_argument(
         "--allowed-chat-ids-env",
-        default="GINO_TELEGRAM_ALLOWED_CHAT_IDS",
+        default="SCS_TELEGRAM_ALLOWED_CHAT_IDS",
         help="Env var holding comma-separated chat IDs allowed to talk to the bot. Unset means anyone.",
     )
     args = parser.parse_args()
@@ -174,7 +174,7 @@ def main() -> int:
     if allowed_chat_ids is None:
         print(
             f"warning: {args.allowed_chat_ids_env} is not set, so any Telegram user who finds this bot can "
-            "talk to it. Set it to Gino's chat ID once you have it.",
+            "talk to it. Set it to the client's chat ID once you have it.",
             file=sys.stderr,
         )
 
@@ -185,7 +185,7 @@ def main() -> int:
 
     run_bot(
         TelegramClient(token),
-        GinoChatAgent(args.source_csv),
+        TradeChatAgent(args.source_csv),
         log=InteractionLog(),
         allowed_chat_ids=allowed_chat_ids,
     )

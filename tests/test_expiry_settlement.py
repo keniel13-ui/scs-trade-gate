@@ -1,9 +1,9 @@
-from gino_gate.expiry_settlement import (
+from scs_gate.expiry_settlement import (
     UnderlyingClose,
     settle_expired_no_close_positions,
     settle_expired_option,
 )
-from gino_gate.paper_forward import PaperPosition
+from scs_gate.paper_forward import PaperPosition
 
 
 def position(**overrides):

@@ -6,8 +6,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.policy import canonical_json
-from gino_gate.scoring_policy import ScoringPolicy
+from scs_gate.policy import canonical_json
+from scs_gate.scoring_policy import ScoringPolicy
 
 
 def main() -> int:
@@ -19,7 +19,7 @@ def main() -> int:
         "policy_path": str(policy_path.relative_to(root)),
         "policy_id": policy.policy_id,
         "policy_hash": policy.policy_hash,
-        "anchor_note": "Machine-readable frozen scoring policy hash. Git commit anchor pending because gino-coherence-gate is not currently a git repo.",
+        "anchor_note": "Machine-readable frozen scoring policy hash. Git commit anchor pending because scs-trade-gate is not currently a git repo.",
     }
     anchor_path.write_text(canonical_json(anchor) + "\n", encoding="utf-8")
     print(json.dumps(anchor, indent=2, sort_keys=True))

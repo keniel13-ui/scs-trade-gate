@@ -1,4 +1,4 @@
-"""Gino Coherence Gate read-only v0."""
+"""the client Coherence Gate read-only v0."""
 
 __all__ = [
     "baselines",

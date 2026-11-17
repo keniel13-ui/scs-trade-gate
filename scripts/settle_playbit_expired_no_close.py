@@ -10,8 +10,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.expiry_settlement import settle_expired_no_close_positions
-from gino_gate.paper_forward import replay_rows
+from scs_gate.expiry_settlement import settle_expired_no_close_positions
+from scs_gate.paper_forward import replay_rows
 
 
 def _read_rows(path: Path) -> list[dict[str, str]]:

@@ -2,7 +2,7 @@ import csv
 
 import pytest
 
-from scripts.gino_operator_verdict import _read_row
+from scripts.operator_verdict import _read_row
 
 
 def test_read_row_requires_filter_when_row_id_is_ambiguous(tmp_path):

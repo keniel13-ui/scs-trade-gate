@@ -3,9 +3,9 @@ from pathlib import Path
 
 import pytest
 
-from gino_gate.market_data_adapter import normalize_historicals_response
-from gino_gate.scoring_policy import ScoringPolicy
-from gino_gate.shadow_score import shadow_score_series, shadow_score_universe
+from scs_gate.market_data_adapter import normalize_historicals_response
+from scs_gate.scoring_policy import ScoringPolicy
+from scs_gate.shadow_score import shadow_score_series, shadow_score_universe
 from tests.test_market_data_adapter import _historicals
 
 

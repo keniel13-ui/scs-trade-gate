@@ -13,8 +13,8 @@ from .receipts import ReceiptChain, verify_chain
 from .verdict import decide
 
 
-DEFAULT_SIGNING_KEY = b"dev-only-gino-gate-key"
-SIGNING_KEY_ENV = "GINO_GATE_LOG_KEY"
+DEFAULT_SIGNING_KEY = b"dev-only-client-gate-key"
+SIGNING_KEY_ENV = "SCS_GATE_LOG_KEY"
 
 
 def signing_key_from_env(*, warn: bool = True) -> bytes:
@@ -66,7 +66,7 @@ def _read_json(path: str) -> Any:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Gino Coherence Gate read-only skeleton")
+    parser = argparse.ArgumentParser(description="the client Coherence Gate read-only skeleton")
     parser.add_argument("--policy", default="config/policy.example.json")
     parser.add_argument("--receipts", default="var/receipts.jsonl")
     parser.add_argument("--manifest-json", help="Path to an upstream MCP manifest JSON file to classify")

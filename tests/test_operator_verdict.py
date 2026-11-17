@@ -1,4 +1,4 @@
-from gino_gate.operator_verdict import explain_call
+from scs_gate.operator_verdict import explain_call
 
 
 def row(**overrides):

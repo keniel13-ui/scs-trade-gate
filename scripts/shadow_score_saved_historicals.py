@@ -11,13 +11,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.policy import sha256_json
-from gino_gate.receipts import ReceiptChain
-from gino_gate.scoring_policy import ScoringPolicy
-from gino_gate.server import DEFAULT_SIGNING_KEY
-from gino_gate.shadow_score import shadow_score_historicals_payload
-from gino_gate.verdict import Verdict
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.policy import sha256_json
+from scs_gate.receipts import ReceiptChain
+from scs_gate.scoring_policy import ScoringPolicy
+from scs_gate.server import DEFAULT_SIGNING_KEY
+from scs_gate.shadow_score import shadow_score_historicals_payload
+from scs_gate.verdict import Verdict
 
 
 def main() -> int:
@@ -40,7 +40,7 @@ def main() -> int:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
 
-    signing_key = os.environ.get("GINO_GATE_LOG_KEY", "").encode("utf-8") or DEFAULT_SIGNING_KEY
+    signing_key = os.environ.get("SCS_GATE_LOG_KEY", "").encode("utf-8") or DEFAULT_SIGNING_KEY
     receipt = ReceiptChain(Path(args.receipts), signing_key).append(
         run_id=args.run_id,
         policy=gate_policy,

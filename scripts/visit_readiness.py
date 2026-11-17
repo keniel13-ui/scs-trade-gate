@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check whether a manifest supports a read-only Gino setup visit.
+"""Check whether a manifest supports a read-only the client setup visit.
 
 This script does not authenticate to Robinhood and does not call any upstream MCP
 server. Pass a captured manifest when one exists. Without a manifest, it uses the
@@ -15,8 +15,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.setup_status import assess_manifest_for_read_only_visit
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.setup_status import assess_manifest_for_read_only_visit
 
 
 REPORTED_SAMPLE_MANIFEST = {

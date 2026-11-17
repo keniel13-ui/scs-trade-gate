@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from gino_gate.scoring_policy import ScoringPolicy
-from gino_gate.scoring_records import ScoringRecordChain
-from gino_gate.receipts import ZERO_HASH
+from scs_gate.scoring_policy import ScoringPolicy
+from scs_gate.scoring_records import ScoringRecordChain
+from scs_gate.receipts import ZERO_HASH
 
 
 def test_scoring_record_chain_links_hashes(tmp_path: Path):

@@ -89,7 +89,7 @@ python3 scripts/live_read_once.py \
   --tool get_equity_quotes \
   --symbol AAPL \
   --response-json /path/to/captured_quote.json \
-  --receipts /tmp/gino-live-read/receipts.jsonl \
+  --receipts /tmp/client-live-read/receipts.jsonl \
   --run-id smoke-live-read
 ```
 

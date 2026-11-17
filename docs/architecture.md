@@ -3,7 +3,7 @@
 This repo has three layers that share one rule: the agent can propose, only
 deterministic code decides, and every decision leaves a receipt.
 
-1. **The gate** (`gino_gate/policy.py`, `manifest.py`, `verdict.py`, `receipts.py`,
+1. **The gate** (`scs_gate/policy.py`, `manifest.py`, `verdict.py`, `receipts.py`,
    `server.py`, `live_read_client.py`): sits between an agent and a future Robinhood MCP
    client. It classifies tools, filters the manifest down to allowlisted read tools,
    computes a verdict from structured inputs, and appends a hash-chained, HMAC-signed
@@ -43,7 +43,7 @@ flowchart LR
   non-read tools: instrument and symbol allowlists, order cap, position cap, rolling
   exposure, daily loss limit, trading hours, human ticket threshold.
 - `ReceiptChain` writes one canonical-JSON line per decision with `seq`, `prev_hash`,
-  `this_hash`, and an `hmac-sha256` signature keyed by `GINO_GATE_LOG_KEY` (falls back to
+  `this_hash`, and an `hmac-sha256` signature keyed by `SCS_GATE_LOG_KEY` (falls back to
   a dev key that is committed in `server.py`).
 - `ReceiptingReadToolClient` decides before calling upstream, never calls upstream on a
   refusal, and stores `result_hash` of the upstream payload in the receipt.
@@ -89,32 +89,32 @@ Several of these default `--as-of-date` to `2026-06-25`, the date of the capture
 
 ```mermaid
 flowchart LR
-    TG[Telegram chat] --> CA[GinoChatAgent<br/>chat_agent.py]
-    DC[Discord channels] --> DM[gino_discord_monitor.py] --> CA
+    TG[Telegram chat] --> CA[TradeChatAgent<br/>chat_agent.py]
+    DC[Discord channels] --> DM[discord_monitor.py] --> CA
     CA -->|row query or pasted call| OV[explain_call<br/>operator_verdict.py]
     OV --> TI[propose_trade_intent + stop/target rules]
     OV -->|REFUSE / PAPER_ONLY / REVIEW_ELIGIBLE| CA
     CA --> TG
     DM -->|verdict alerts| TG
-    TG -.-> IL[(var/gino_interaction_log.jsonl)]
+    TG -.-> IL[(var/scs_interaction_log.jsonl)]
 ```
 
-- `GinoChatAgent` is not an LLM. It is keyword routing plus regex parsing of row
+- `TradeChatAgent` is not an LLM. It is keyword routing plus regex parsing of row
   queries (`row 32 COIN`) and pasted option calls (`AAPL 7/19 200c @2.50`).
 - `watchlist.py` can ask a local Ollama model (`localhost:11434`) to structure a free-form
   watch list. The model only structures text; it never judges. The deterministic parser
   is the fallback.
-- `run_gino_agent_stack.py` starts the Telegram bot and Discord monitor as child
+- `run_scs_agent_stack.py` starts the Telegram bot and Discord monitor as child
   processes.
 
 ## Network surface
 
 | Code | Talks to | Why |
 | --- | --- | --- |
-| `scripts/gino_telegram_bot.py` | `api.telegram.org` | Long-poll and reply |
-| `scripts/gino_discord_monitor.py` | `discord.com/api/v10` | Read approved channels |
-| `gino_gate/stop_enforcement.py`, `expiry_settlement.py`, `live_eligibility.py` (default fetchers) | `query1.finance.yahoo.com` | Daily bars for settlement, stop, and eligibility checks |
-| `gino_gate/watchlist.py` | `localhost:11434` (Ollama) | Optional text structuring |
+| `scripts/telegram_bot.py` | `api.telegram.org` | Long-poll and reply |
+| `scripts/discord_monitor.py` | `discord.com/api/v10` | Read approved channels |
+| `scs_gate/stop_enforcement.py`, `expiry_settlement.py`, `live_eligibility.py` (default fetchers) | `query1.finance.yahoo.com` | Daily bars for settlement, stop, and eligibility checks |
+| `scs_gate/watchlist.py` | `localhost:11434` (Ollama) | Optional text structuring |
 
 Everything else is offline. Tests do not touch the network.
 

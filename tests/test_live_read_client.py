@@ -1,7 +1,7 @@
 import json
 
-from gino_gate.live_read_client import ReceiptingReadToolClient
-from gino_gate.policy import PolicyEnvelope
+from scs_gate.live_read_client import ReceiptingReadToolClient
+from scs_gate.policy import PolicyEnvelope
 
 
 def _policy() -> PolicyEnvelope:

@@ -7,8 +7,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.server import ReadOnlyGate
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.server import ReadOnlyGate
 
 
 SAMPLE_MANIFEST = {

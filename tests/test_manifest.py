@@ -1,4 +1,4 @@
-from gino_gate.manifest import classify_tool, filter_manifest
+from scs_gate.manifest import classify_tool, filter_manifest
 
 
 def test_classifies_reported_robinhood_tools():

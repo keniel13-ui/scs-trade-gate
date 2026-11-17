@@ -1,6 +1,6 @@
 import pytest
 
-from gino_gate.manifest_capture import ManifestCaptureError, normalize_manifest_payload
+from scs_gate.manifest_capture import ManifestCaptureError, normalize_manifest_payload
 
 
 def test_normalizes_json_rpc_tools_list_response():

@@ -12,8 +12,8 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.chat_agent import DEFAULT_SOURCE_CSV, GinoChatAgent
-from scripts.gino_telegram_bot import TelegramClient
+from scs_gate.chat_agent import DEFAULT_SOURCE_CSV, TradeChatAgent
+from scripts.telegram_bot import TelegramClient
 
 
 class DiscordRestClient:
@@ -29,7 +29,7 @@ class DiscordRestClient:
         query = urllib.parse.urlencode(params)
         request = urllib.request.Request(f"https://discord.com/api/v10/channels/{channel_id}/messages?{query}")
         request.add_header("Authorization", f"Bot {self.token}")
-        request.add_header("User-Agent", "gino-coherence-gate/0.1")
+        request.add_header("User-Agent", "scs-trade-gate/0.1")
         with urllib.request.urlopen(request, timeout=20) as response:
             messages = json.loads(response.read().decode("utf-8"))
         if not isinstance(messages, list):
@@ -62,7 +62,7 @@ def run_monitor(
     *,
     discord: DiscordRestClient,
     channel_ids: list[str],
-    agent: GinoChatAgent,
+    agent: TradeChatAgent,
     telegram: TelegramClient | None = None,
     telegram_chat_id: int | None = None,
     poll_seconds: float = 5.0,
@@ -71,7 +71,7 @@ def run_monitor(
         raise ValueError("At least one Discord channel ID is required")
 
     last_seen: dict[str, str | None] = {channel_id: None for channel_id in channel_ids}
-    print("Gino Discord monitor is running in paper/shadow mode.")
+    print("the client Discord monitor is running in paper/shadow mode.")
     print("It reads approved Discord channels, verdicts parseable calls, and never places trades.")
     print("Press Ctrl+C to stop.")
 
@@ -107,13 +107,13 @@ def run_monitor(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Monitor Discord channels and send Gino agent verdicts to Telegram/stdout.")
+    parser = argparse.ArgumentParser(description="Monitor Discord channels and send the client agent verdicts to Telegram/stdout.")
     parser.add_argument("--source-csv", type=Path, default=DEFAULT_SOURCE_CSV)
     parser.add_argument("--poll-seconds", type=float, default=5.0)
-    parser.add_argument("--discord-token-env", default="GINO_DISCORD_BOT_TOKEN")
-    parser.add_argument("--discord-channel-ids-env", default="GINO_DISCORD_CHANNEL_IDS")
-    parser.add_argument("--telegram-token-env", default="GINO_TELEGRAM_BOT_TOKEN")
-    parser.add_argument("--telegram-chat-id-env", default="GINO_TELEGRAM_CHAT_ID")
+    parser.add_argument("--discord-token-env", default="SCS_DISCORD_BOT_TOKEN")
+    parser.add_argument("--discord-channel-ids-env", default="SCS_DISCORD_CHANNEL_IDS")
+    parser.add_argument("--telegram-token-env", default="SCS_TELEGRAM_BOT_TOKEN")
+    parser.add_argument("--telegram-chat-id-env", default="SCS_TELEGRAM_CHAT_ID")
     args = parser.parse_args()
 
     discord_token = os.environ.get(args.discord_token_env, "").strip()
@@ -133,7 +133,7 @@ def main() -> int:
     run_monitor(
         discord=DiscordRestClient(discord_token),
         channel_ids=channel_ids,
-        agent=GinoChatAgent(args.source_csv),
+        agent=TradeChatAgent(args.source_csv),
         telegram=telegram,
         telegram_chat_id=telegram_chat_id,
         poll_seconds=args.poll_seconds,

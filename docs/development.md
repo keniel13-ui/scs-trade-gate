@@ -42,12 +42,12 @@ local, gitignored captures under `manifests/`.
 These need no credentials and make no network calls:
 
 ```bash
-python scripts/smoke_gino_gate.py
+python scripts/smoke_scs_gate.py
 python scripts/smoke_signal_scorer.py
 python scripts/smoke_market_data_adapter.py
-python scripts/gino_visit_readiness.py
-python -m gino_gate.server
-python -m gino_gate.server --call-tool place_equity_order --args-json '{"symbol": "AAPL", "notional_usd": 10}'
+python scripts/visit_readiness.py
+python -m scs_gate.server
+python -m scs_gate.server --call-tool place_equity_order --args-json '{"symbol": "AAPL", "notional_usd": 10}'
 ```
 
 The last command prints a `REFUSE` verdict and appends a receipt to `var/receipts.jsonl`.
@@ -55,8 +55,8 @@ The last command prints a `REFUSE` verdict and appends a receipt to `var/receipt
 ## Chat agent without Telegram
 
 ```bash
-python scripts/gino_chat_agent.py --source-csv path/to/calls.csv --message "what can you do?"
-python scripts/gino_chat_agent.py --source-csv path/to/calls.csv --message "AAPL 7/19 200c @2.50 TP 210 SL 190"
+python scripts/chat_agent.py --source-csv path/to/calls.csv --message "what can you do?"
+python scripts/chat_agent.py --source-csv path/to/calls.csv --message "AAPL 7/19 200c @2.50 TP 210 SL 190"
 ```
 
 `--source-csv` defaults to a path on the author's machine. Pass your own CSV with the
@@ -67,10 +67,10 @@ Pasted calls do not need any rows in it.
 
 | Variable | Used by | Notes |
 | --- | --- | --- |
-| `GINO_GATE_LOG_KEY` | `gino_gate.server`, `live_read_once.py`, shadow score scripts | HMAC key for receipts. Unset falls back to a public dev key. |
-| `GINO_TELEGRAM_BOT_TOKEN` | Telegram bot, Discord monitor, stack runner | Never commit it. |
-| `GINO_TELEGRAM_CHAT_ID` | Discord monitor | Where alerts go. |
-| `GINO_DISCORD_BOT_TOKEN` | Discord monitor | Read-only bot. |
-| `GINO_DISCORD_CHANNEL_IDS` | Discord monitor | Comma-separated. |
+| `SCS_GATE_LOG_KEY` | `scs_gate.server`, `live_read_once.py`, shadow score scripts | HMAC key for receipts. Unset falls back to a public dev key. |
+| `SCS_TELEGRAM_BOT_TOKEN` | Telegram bot, Discord monitor, stack runner | Never commit it. |
+| `SCS_TELEGRAM_CHAT_ID` | Discord monitor | Where alerts go. |
+| `SCS_DISCORD_BOT_TOKEN` | Discord monitor | Read-only bot. |
+| `SCS_DISCORD_CHANNEL_IDS` | Discord monitor | Comma-separated. |
 
 The Mac mini runbook is in `docs/mac_mini_setup.md`.

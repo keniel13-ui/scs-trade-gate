@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.paper_forward import positions_as_dicts, replay_rows
+from scs_gate.paper_forward import positions_as_dicts, replay_rows
 
 
 def _read_rows(path: Path) -> list[dict[str, str]]:

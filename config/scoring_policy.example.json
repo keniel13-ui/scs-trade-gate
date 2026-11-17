@@ -1,5 +1,5 @@
 {
-  "policy_id": "gino-scorer-v0-2026-06-18",
+  "policy_id": "scs-scorer-v0-2026-06-18",
   "entry_latency_sec": 30,
   "account_equity_usd": 5000,
   "rule_variants": [

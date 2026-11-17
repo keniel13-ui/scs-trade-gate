@@ -10,9 +10,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.manifest_capture import ManifestCaptureError, normalize_manifest_payload
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.setup_status import assess_manifest_for_read_only_visit
+from scs_gate.manifest_capture import ManifestCaptureError, normalize_manifest_payload
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.setup_status import assess_manifest_for_read_only_visit
 
 
 def _read_json(path: str) -> object:

@@ -245,7 +245,7 @@ def write_summary(path: Path, source: Path, messages: list[MessageRow], ledger: 
             "",
             "## Verdict",
             "",
-            "This is enough to run the Gino v0 evidence gate and show how the agent separates countable chains from hype.",
+            "This is enough to run the client v0 evidence gate and show how the agent separates countable chains from hype.",
             "It is not enough to claim that any trader or source is proven profitable.",
         ]
     )

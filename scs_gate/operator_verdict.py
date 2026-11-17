@@ -73,7 +73,7 @@ def explain_call(row: dict[str, str]) -> OperatorVerdict:
             "entry is parseable",
             f"stop: {stop.raw}",
             f"target: {target.raw}",
-            "live order still requires Gino approval and policy/risk caps",
+            "live order still requires the client approval and policy/risk caps",
         ],
     )
 

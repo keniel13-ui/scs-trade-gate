@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from gino_gate.chat_agent import GinoChatAgent
+from scs_gate.chat_agent import TradeChatAgent
 
 
 def _sample_csv(tmp_path: Path) -> Path:
@@ -15,7 +15,7 @@ def _sample_csv(tmp_path: Path) -> Path:
 
 
 def test_chat_agent_explains_current_boundary(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("Can you auto trade Robinhood live?")
 
@@ -25,7 +25,7 @@ def test_chat_agent_explains_current_boundary(tmp_path):
 
 
 def test_chat_agent_routes_row_question_to_operator_verdict(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("explain row 32 COIN")
 
@@ -36,7 +36,7 @@ def test_chat_agent_routes_row_question_to_operator_verdict(tmp_path):
 
 
 def test_chat_agent_keeps_missing_stop_target_paper_only(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("what about row 16 ORCL?")
 
@@ -46,7 +46,7 @@ def test_chat_agent_keeps_missing_stop_target_paper_only(tmp_path):
 
 
 def test_chat_agent_discusses_purpose_without_promising_rescue(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("why should I trust you to make money and save me?")
 
@@ -56,7 +56,7 @@ def test_chat_agent_discusses_purpose_without_promising_rescue(tmp_path):
 
 
 def test_chat_agent_slows_down_impulse_trades(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("I'm frustrated and want a revenge trade after a loss")
 
@@ -66,7 +66,7 @@ def test_chat_agent_slows_down_impulse_trades(tmp_path):
 
 
 def test_chat_agent_captures_profile_rule_in_memory(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("my max risk is $50")
 
@@ -75,7 +75,7 @@ def test_chat_agent_captures_profile_rule_in_memory(tmp_path):
 
 
 def test_chat_agent_parses_pasted_discord_call_with_stop_and_target(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("Discord call: AAPL 7/19 200c @2.50 TP 210 SL 190")
 
@@ -88,7 +88,7 @@ def test_chat_agent_parses_pasted_discord_call_with_stop_and_target(tmp_path):
 
 
 def test_chat_agent_keeps_pasted_discord_call_without_stop_target_paper_only(tmp_path):
-    agent = GinoChatAgent(_sample_csv(tmp_path))
+    agent = TradeChatAgent(_sample_csv(tmp_path))
 
     response = agent.reply("NVDA 230c 7/19 @4.20 looks strong")
 

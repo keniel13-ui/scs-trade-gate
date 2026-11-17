@@ -11,9 +11,9 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.market_data_adapter import ReadOnlyMarketDataAdapter, generate_own_signals_from_market_data
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.verdict import decide
+from scs_gate.market_data_adapter import ReadOnlyMarketDataAdapter, generate_own_signals_from_market_data
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.verdict import decide
 
 
 class FixtureGateClient:

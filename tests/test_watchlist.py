@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from gino_gate.watchlist import WatchlistItem, parse_watchlist, summarize_watchlist
-from gino_gate.watchlist_ledger import WatchlistLedger
+from scs_gate.watchlist import WatchlistItem, parse_watchlist, summarize_watchlist
+from scs_gate.watchlist_ledger import WatchlistLedger
 
-GINO_6_29 = """Watch List 6/29
+SCS_6_29 = """Watch List 6/29
 $CRWD (CrowdStrike) – Looking very strong. Watching for a break above 705. If momentum continues, a move toward 740 this week is possible.
 $MU (Micron) – Still bullish. Can pop hard at any moment.
 $APP (AppLovin) – Looking much better. Needs to clear 509. If it does, 540 is possible.
@@ -14,7 +14,7 @@ Notes: Use next week's contracts whenever possible. Short trading week.
 
 
 def test_deterministic_parse_finds_tickers_and_triggers():
-    items = parse_watchlist(GINO_6_29, use_llm=False)
+    items = parse_watchlist(SCS_6_29, use_llm=False)
     tickers = {it.ticker for it in items}
     assert {"CRWD", "MU", "APP", "TSLA", "NET"}.issubset(tickers)
     crwd = next(it for it in items if it.ticker == "CRWD")
@@ -24,7 +24,7 @@ def test_deterministic_parse_finds_tickers_and_triggers():
 
 
 def test_missing_fields_flag_watchlist_as_hypothesis():
-    items = parse_watchlist(GINO_6_29, use_llm=False)
+    items = parse_watchlist(SCS_6_29, use_llm=False)
     for it in items:
         # a watch list always lacks stop and sizing, and never an exact contract
         assert "stop" in it.missing_fields
@@ -36,7 +36,7 @@ def test_missing_fields_flag_watchlist_as_hypothesis():
 
 
 def test_summary_is_honest_never_calls_it_good():
-    items = parse_watchlist(GINO_6_29, use_llm=False)
+    items = parse_watchlist(SCS_6_29, use_llm=False)
     summary = summarize_watchlist(items)
     assert "hypotheses, not trade-ready signals" in summary
     assert "not a verdict" in summary
@@ -53,7 +53,7 @@ def test_empty_input_is_handled():
 
 def test_ledger_records_with_price_pending(tmp_path):
     ledger = WatchlistLedger(tmp_path / "wl.jsonl")
-    items = parse_watchlist(GINO_6_29, use_llm=False)
+    items = parse_watchlist(SCS_6_29, use_llm=False)
     recs = ledger.record_watchlist(items)
     assert len(recs) == len(items)
     assert ledger.count() == len(items)
@@ -90,7 +90,7 @@ class _FakeOllamaResponse:
 
 
 def test_llm_items_with_invalid_tickers_are_dropped(monkeypatch):
-    from gino_gate import watchlist
+    from scs_gate import watchlist
 
     payload = [
         {"ticker": "$crwd", "trigger": "above 705"},
@@ -105,11 +105,11 @@ def test_llm_items_with_invalid_tickers_are_dropped(monkeypatch):
 
 
 def test_llm_failure_falls_back_to_deterministic(monkeypatch):
-    from gino_gate import watchlist
+    from scs_gate import watchlist
 
     def offline(req, timeout):
         raise OSError("connection refused")
 
     monkeypatch.setattr(watchlist.urllib.request, "urlopen", offline)
-    items = parse_watchlist(GINO_6_29, use_llm=True)
+    items = parse_watchlist(SCS_6_29, use_llm=True)
     assert items and all(it.engine == "deterministic" for it in items)

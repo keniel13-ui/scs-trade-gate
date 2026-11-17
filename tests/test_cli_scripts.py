@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _run(*args: str, stdin: str | None = None) -> subprocess.CompletedProcess:
-    env = {**os.environ, "GINO_GATE_LOG_KEY": "test-key"}
+    env = {**os.environ, "SCS_GATE_LOG_KEY": "test-key"}
     return subprocess.run(
         [sys.executable, *args],
         cwd=ROOT,
@@ -33,8 +33,8 @@ def _json(proc: subprocess.CompletedProcess):
     return json.loads(proc.stdout)
 
 
-def test_smoke_gino_gate_refuses_order_and_never_forwards():
-    out = _json(_run("scripts/smoke_gino_gate.py"))
+def test_smoke_scs_gate_refuses_order_and_never_forwards():
+    out = _json(_run("scripts/smoke_scs_gate.py"))
     assert out["read_result"]["ok"] is True
     assert out["read_result"]["upstream_forwarded"] is False
     assert out["trade_result"]["ok"] is False
@@ -56,20 +56,20 @@ def test_smoke_market_data_adapter_runs():
 
 
 def test_visit_readiness_with_reported_sample():
-    out = _json(_run("scripts/gino_visit_readiness.py"))
+    out = _json(_run("scripts/visit_readiness.py"))
     assert out["manifest_source"] == "reported_sample_manifest_not_live"
     assert out["boundary"] == "read_only_readiness_only_no_auth_no_orders"
 
 
 def test_server_cli_prints_policy_identity():
-    out = _json(_run("-m", "gino_gate.server"))
+    out = _json(_run("-m", "scs_gate.server"))
     assert out["mode"] == "read_only"
     assert out["policy_hash"].startswith("sha256:")
 
 
 def test_server_cli_refuses_order_tool(tmp_path):
     out = _json(_run(
-        "-m", "gino_gate.server",
+        "-m", "scs_gate.server",
         "--receipts", str(tmp_path / "r.jsonl"),
         "--call-tool", "place_equity_order",
         "--args-json", '{"symbol": "AAPL", "notional_usd": 10}',

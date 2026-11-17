@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta, timezone
 
-from gino_gate.own_signals import generate_rsi2_signals, generate_ts_momentum_signals
-from gino_gate.price_data import PriceSeries, load_ohlc_csv, rsi, rolling_sma
-from gino_gate.scorer import Bar
+from scs_gate.own_signals import generate_rsi2_signals, generate_ts_momentum_signals
+from scs_gate.price_data import PriceSeries, load_ohlc_csv, rsi, rolling_sma
+from scs_gate.scorer import Bar
 
 
 def _bars(count=260):

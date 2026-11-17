@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from gino_gate.scorer import simulate_signal
-from gino_gate.scoring_policy import ScoringPolicy
+from scs_gate.scorer import simulate_signal
+from scs_gate.scoring_policy import ScoringPolicy
 
 
 ROOT = Path(__file__).resolve().parents[1]

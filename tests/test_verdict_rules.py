@@ -2,8 +2,8 @@
 
 from datetime import datetime
 
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.verdict import decide
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.verdict import decide
 
 
 def _policy(**authority_overrides):

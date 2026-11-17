@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.server import ReadOnlyGate
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.server import ReadOnlyGate
 
 
 ROOT = Path(__file__).resolve().parents[1]

@@ -6,16 +6,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.chat_agent import DEFAULT_SOURCE_CSV, GinoChatAgent
+from scs_gate.chat_agent import DEFAULT_SOURCE_CSV, TradeChatAgent
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Chat with Gino's local paper/shadow trading agent.")
+    parser = argparse.ArgumentParser(description="Chat with the client's local paper/shadow trading agent.")
     parser.add_argument("--source-csv", type=Path, default=DEFAULT_SOURCE_CSV)
     parser.add_argument("--message", default="", help="Run one message and exit.")
     args = parser.parse_args()
 
-    agent = GinoChatAgent(args.source_csv)
+    agent = TradeChatAgent(args.source_csv)
     if args.message:
         try:
             print(agent.reply(args.message).message)
@@ -24,13 +24,13 @@ def main() -> int:
             return 2
         return 0
 
-    print("Gino agent chat is running in paper/shadow mode.")
+    print("the client agent chat is running in paper/shadow mode.")
     print("It can talk through trades, rules, sources, discipline, and verdicts.")
     print("It cannot place live Robinhood trades. Try: explain row 32 COIN")
     print("Type 'exit' or 'quit' to stop.\n")
     while True:
         try:
-            message = input("Gino> ")
+            message = input("the client> ")
         except EOFError:
             print("")
             return 0

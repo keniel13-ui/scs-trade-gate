@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from gino_gate import server
-from gino_gate.server import DEFAULT_SIGNING_KEY, main, signing_key_from_env
+from scs_gate import server
+from scs_gate.server import DEFAULT_SIGNING_KEY, main, signing_key_from_env
 
 
 ROOT = Path(__file__).resolve().parents[1]

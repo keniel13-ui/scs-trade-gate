@@ -6,9 +6,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.scorer import simulate_signal
-from gino_gate.scoring_metrics import aggregate_records
-from gino_gate.scoring_policy import ScoringPolicy
+from scs_gate.scorer import simulate_signal
+from scs_gate.scoring_metrics import aggregate_records
+from scs_gate.scoring_policy import ScoringPolicy
 
 
 def main() -> int:
@@ -16,7 +16,7 @@ def main() -> int:
     policy = ScoringPolicy.from_file(root / "config" / "scoring_policy.frozen.2026-06-18.json")
     signal = {
         "signal_id": "sig-001",
-        "source": "discord:gino-test",
+        "source": "discord:client-test",
         "symbol": "NVDA",
         "side": "buy",
         "posted_at": "2026-06-18T14:00:00Z",

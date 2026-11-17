@@ -1,5 +1,5 @@
-from gino_gate.paper_forward import PaperPosition
-from gino_gate.scorecard import parse_reported_pct, score_positions, trim_aware_realized_pct
+from scs_gate.paper_forward import PaperPosition
+from scs_gate.scorecard import parse_reported_pct, score_positions, trim_aware_realized_pct
 
 
 def position(**overrides):

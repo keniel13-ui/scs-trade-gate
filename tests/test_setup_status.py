@@ -1,5 +1,5 @@
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.setup_status import assess_manifest_for_read_only_visit
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.setup_status import assess_manifest_for_read_only_visit
 
 
 def test_assess_manifest_ready_when_read_and_trade_tools_present():

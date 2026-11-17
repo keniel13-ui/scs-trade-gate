@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.trade_intent import propose_trade_intent
+from scs_gate.trade_intent import propose_trade_intent
 
 
 def _read_signal_rows(path: Path) -> list[dict[str, str]]:

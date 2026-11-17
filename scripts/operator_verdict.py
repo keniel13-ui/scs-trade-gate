@@ -9,7 +9,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.operator_verdict import explain_call
+from scs_gate.operator_verdict import explain_call
 
 
 def _read_row(path: Path, row_id: str, *, trader: str = "", ticker: str = "") -> dict[str, str]:
@@ -32,7 +32,7 @@ def _read_row(path: Path, row_id: str, *, trader: str = "", ticker: str = "") ->
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Explain one trading call the way Gino's agent would.")
+    parser = argparse.ArgumentParser(description="Explain one trading call the way the client's agent would.")
     parser.add_argument("source_csv", type=Path)
     parser.add_argument("--row-id", required=True)
     parser.add_argument("--trader", default="")

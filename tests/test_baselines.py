@@ -1,5 +1,5 @@
-from gino_gate.baselines import random_timed_entry_expectancy, spy_buy_hold_same_window
-from gino_gate.scoring_policy import ScoringPolicy
+from scs_gate.baselines import random_timed_entry_expectancy, spy_buy_hold_same_window
+from scs_gate.scoring_policy import ScoringPolicy
 
 
 def _policy():

@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.receipts import ReceiptChain, ZERO_HASH, verify_chain
-from gino_gate.verdict import Verdict
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.receipts import ReceiptChain, ZERO_HASH, verify_chain
+from scs_gate.verdict import Verdict
 
 
 def _policy():

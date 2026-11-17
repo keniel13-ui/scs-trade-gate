@@ -103,7 +103,7 @@ No order review, no order placement, no live trading.
 6. Confirm readiness:
 
    ```bash
-   python3 scripts/gino_visit_readiness.py --manifest-json manifests/robinhood_manifest.normalized.json
+   python3 scripts/visit_readiness.py --manifest-json manifests/robinhood_manifest.normalized.json
    ```
 
 ## Success Criteria

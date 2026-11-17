@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from gino_gate.interaction_log import InteractionLog
+from scs_gate.interaction_log import InteractionLog
 
 
 def test_record_appends_and_tail_reads_back(tmp_path):

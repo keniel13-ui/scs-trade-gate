@@ -8,8 +8,8 @@ from typing import Any
 
 from .watchlist import WatchlistItem
 
-# Lives under var/ (gitignored): Gino's data stays local, never committed.
-DEFAULT_LEDGER_PATH = Path(__file__).resolve().parents[1] / "var" / "gino_watchlist_ledger.jsonl"
+# Lives under var/ (gitignored): the client's data stays local, never committed.
+DEFAULT_LEDGER_PATH = Path(__file__).resolve().parents[1] / "var" / "scs_watchlist_ledger.jsonl"
 
 
 def _now_iso() -> str:
@@ -40,7 +40,7 @@ class WatchlistRecord:
 
 
 class WatchlistLedger:
-    """Append-only ledger that turns Gino's daily watch lists into receipts.
+    """Append-only ledger that turns the client's daily watch lists into receipts.
 
     Not prediction. Chronological capture: what was called, when, what it was missing, and
     (once a price source is wired) the price at the moment of the call, settled later. The

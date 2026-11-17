@@ -1,5 +1,5 @@
 {
-  "policy_id": "gino-v0-2026-06-18",
+  "policy_id": "client-v0-2026-06-18",
   "mode": "read_only",
   "purpose": {
     "statement": "preserve capital while learning; no real-money movement in v0",

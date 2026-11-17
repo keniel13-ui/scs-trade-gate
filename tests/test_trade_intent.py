@@ -1,4 +1,4 @@
-from gino_gate.trade_intent import parse_option_leg, propose_trade_intent
+from scs_gate.trade_intent import parse_option_leg, propose_trade_intent
 
 
 def row(**overrides):

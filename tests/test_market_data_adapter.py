@@ -5,15 +5,15 @@ from typing import Any
 
 import pytest
 
-from gino_gate.market_data_adapter import (
+from scs_gate.market_data_adapter import (
     MarketDataAdapterError,
     ReadOnlyMarketDataAdapter,
     generate_own_signals_from_market_data,
     normalize_historicals_response,
     normalize_quote_response,
 )
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.verdict import decide
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.verdict import decide
 
 
 class FixtureGateClient:

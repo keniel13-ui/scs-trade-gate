@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from gino_gate.chat_agent import GinoChatAgent
-from scripts.gino_discord_monitor import run_monitor
+from scs_gate.chat_agent import TradeChatAgent
+from scripts.discord_monitor import run_monitor
 
 
 class FakeDiscord:
@@ -41,7 +41,7 @@ def test_discord_monitor_alerts_on_parseable_trade(tmp_path):
     run_monitor(
         discord=FakeDiscord(),
         channel_ids=["channel-1"],
-        agent=GinoChatAgent(_sample_csv(tmp_path)),
+        agent=TradeChatAgent(_sample_csv(tmp_path)),
         telegram=telegram,
         telegram_chat_id=100,
         poll_seconds=0,

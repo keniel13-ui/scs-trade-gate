@@ -1,6 +1,6 @@
 from datetime import date
 
-from gino_gate.paper_forward import replay_rows
+from scs_gate.paper_forward import replay_rows
 
 
 def row(

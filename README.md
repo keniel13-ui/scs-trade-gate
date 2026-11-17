@@ -1,6 +1,6 @@
-# Gino Coherence Gate
+# the client Coherence Gate
 
-Read-only v0 skeleton for the Gino execution proof.
+Read-only v0 skeleton for the client execution proof.
 
 This project implements the local, deterministic gate that sits between an agent and a future Robinhood MCP client. It does not connect to Robinhood, does not hold credentials, and cannot place trades. The first job is to prove the gate spine: frozen policy, read-only tool filtering, deterministic verdicts, and signed chained receipts.
 
@@ -19,9 +19,9 @@ This project implements the local, deterministic gate that sits between an agent
 - Normalize gate-mediated read-only market data into `PriceSeries` / `Quote` and feed owned signal sources.
 - Receipt one captured live read response with a deterministic gate verdict and result hash.
 - Run a money-safe shadow-score preview from saved read-only historical data without treating variant records as independent signals.
-- Assess whether a captured MCP manifest can support a read-only Gino setup visit.
+- Assess whether a captured MCP manifest can support a read-only the client setup visit.
 - Normalize a user-authenticated MCP `tools/list` capture into the gate manifest shape.
-- Keep the Gino visit checklist explicit: read-only first, customer feeds optional, no credentials handled by Keniel.
+- Keep the client visit checklist explicit: read-only first, customer feeds optional, no credentials handled by Keniel.
 - Replay a captured PlayBit Discord signal chain through trade intents, paper-forward positions, expiry settlement, stop enforcement, live eligibility, and a settled scorecard (`scripts/*_playbit_*.py`).
 - Run a deterministic paper/shadow operator agent that returns `REFUSE`, `PAPER_ONLY`, or `REVIEW_ELIGIBLE` for captured rows and pasted calls, over a local CLI, Telegram, or a Discord monitor (`docs/mac_mini_setup.md`).
 - Parse free-form watch lists into hypotheses (optionally with a local Ollama model that only structures text) and record them in a local ledger.
@@ -53,7 +53,7 @@ Anchor file:
 
 Public git receipt:
 
-`https://github.com/keniel13-ui/gino-coherence-gate`
+`https://github.com/keniel13-ui/scs-trade-gate`
 
 Freeze commit:
 
@@ -73,7 +73,7 @@ Run commands from the repo root. Full setup: `docs/development.md`.
 ## Smoke Test
 
 ```bash
-python3 scripts/smoke_gino_gate.py
+python3 scripts/smoke_scs_gate.py
 ```
 
 ```bash
@@ -93,7 +93,7 @@ python3 scripts/shadow_score_saved_historicals.py --symbol AAPL --historicals-js
 ```
 
 ```bash
-python3 scripts/gino_visit_readiness.py
+python3 scripts/visit_readiness.py
 ```
 
 When a real authenticated manifest exists:
@@ -103,12 +103,12 @@ python3 scripts/normalize_manifest_capture.py manifests/robinhood_manifest.raw.j
 ```
 
 ```bash
-python3 scripts/gino_visit_readiness.py --manifest-json path/to/manifest.json
+python3 scripts/visit_readiness.py --manifest-json path/to/manifest.json
 ```
 
 Visit checklist:
 
-`docs/gino_intake_checklist_2026-06-18.md`
+`docs/scs_intake_checklist_2026-06-18.md`
 
 Manifest capture checklist:
 

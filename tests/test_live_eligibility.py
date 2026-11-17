@@ -1,10 +1,10 @@
-from gino_gate.live_eligibility import (
+from scs_gate.live_eligibility import (
     evaluate_live_eligible_positions,
     evaluate_position_eligibility,
     parse_target_rule,
 )
-from gino_gate.paper_forward import PaperPosition
-from gino_gate.stop_enforcement import DailyBar
+from scs_gate.paper_forward import PaperPosition
+from scs_gate.stop_enforcement import DailyBar
 
 
 def position(**overrides):

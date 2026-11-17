@@ -16,13 +16,13 @@ def _required_env(names: list[str]) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run Gino Telegram chat plus Discord monitor from one terminal.")
+    parser = argparse.ArgumentParser(description="Run the client Telegram chat plus Discord monitor from one terminal.")
     parser.add_argument("--no-discord", action="store_true", help="Run Telegram chat only.")
     args = parser.parse_args()
 
-    required = ["GINO_TELEGRAM_BOT_TOKEN"]
+    required = ["SCS_TELEGRAM_BOT_TOKEN"]
     if not args.no_discord:
-        required.extend(["GINO_DISCORD_BOT_TOKEN", "GINO_DISCORD_CHANNEL_IDS", "GINO_TELEGRAM_CHAT_ID"])
+        required.extend(["SCS_DISCORD_BOT_TOKEN", "SCS_DISCORD_CHANNEL_IDS", "SCS_TELEGRAM_CHAT_ID"])
     missing = _required_env(required)
     if missing:
         print("Missing required environment variables:", ", ".join(missing), file=sys.stderr)
@@ -30,20 +30,20 @@ def main() -> int:
         return 2
 
     commands = [
-        [sys.executable, "scripts/gino_telegram_bot.py"],
+        [sys.executable, "scripts/telegram_bot.py"],
     ]
     if not args.no_discord:
-        commands.append([sys.executable, "scripts/gino_discord_monitor.py"])
+        commands.append([sys.executable, "scripts/discord_monitor.py"])
 
     processes: list[subprocess.Popen] = []
     try:
         for command in commands:
             processes.append(subprocess.Popen(command, cwd=ROOT))
-        print("Gino agent stack is running. Press Ctrl+C here to stop all processes.")
+        print("the client agent stack is running. Press Ctrl+C here to stop all processes.")
         for process in processes:
             process.wait()
     except KeyboardInterrupt:
-        print("\nStopping Gino agent stack...")
+        print("\nStopping the client agent stack...")
     finally:
         for process in processes:
             if process.poll() is None:

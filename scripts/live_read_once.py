@@ -17,10 +17,10 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from gino_gate.live_read_client import ReceiptingReadToolClient
-from gino_gate.market_data_adapter import ReadOnlyMarketDataAdapter
-from gino_gate.policy import PolicyEnvelope
-from gino_gate.server import signing_key_from_env
+from scs_gate.live_read_client import ReceiptingReadToolClient
+from scs_gate.market_data_adapter import ReadOnlyMarketDataAdapter
+from scs_gate.policy import PolicyEnvelope
+from scs_gate.server import signing_key_from_env
 
 
 def _read_json(path: str) -> Any:
